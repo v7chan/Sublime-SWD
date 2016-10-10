@@ -1,0 +1,15 @@
+[
+  {
+    "caption": "Set Working Directory",
+    "id": "set_working_directory",
+    "command": "set_working_directory",
+    "args": {
+      "paths": []
+    }
+  },
+  {
+    "caption": "Clear Working Directory",
+    "id": "clear_working_directory",
+    "command": "clear_working_directory"
+  }
+]
