@@ -2,6 +2,7 @@ import sublime
 import sublime_plugin
 import os
 import ast
+import webbrowser
 
 SETTINGS_FILE = "Preferences.sublime-settings"
 DEFAULT = ['*.jpg', '*.jpeg', '*.png', '*.gif', '*.ttf', '*.tga', '*.dds', '*.ico', '*.eot', '*.pdf', '*.swf', '*.jar', '*.zip']
@@ -29,6 +30,15 @@ class ClearWorkingDirectoryCommand(sublime_plugin.TextCommand):
 		# print(settings.get('binary_file_patterns'))
 	def is_enabled(self):
 		return not settings.get('binary_file_patterns') == DEFAULT
+
+class OpenOnGithubCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		webbrowser.open_new_tab(self.githubURL())
+	def githubURL(self):
+		base_url      = 'https://github.com/q-centrix/web/blob/master/'
+		file_path     = self.view.file_name()
+		relative_path = file_path[(file_path.index('web') + 4):]
+		return (base_url + relative_path)
 
 def plugin_loaded():
 	global settings
