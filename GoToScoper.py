@@ -35,10 +35,16 @@ class OpenOnGithubCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		webbrowser.open_new_tab(self.githubURL())
 	def githubURL(self):
-		base_url      = 'https://github.com/Codefied/housecall-web/blob/master/'
-		file_path     = self.view.file_name()
-		relative_path = file_path[(file_path.index('web') + 4):]
-		return (base_url + relative_path)
+		base_code_path = '/Users/vchan/code/housecall/'
+		base_url = 'https://github.com/Codefied'
+
+		file_path = self.view.file_name()
+		relative_path = file_path[(file_path.index(base_code_path) + len(base_code_path)):]
+
+		repo_name = relative_path[0:(relative_path.find('/'))]
+		relative_code_path = relative_path[(relative_path.find('/') + 1):]
+
+		return ("%s/%s/blob/master/%s" % (base_url, repo_name, relative_code_path))
 
 def plugin_loaded():
 	global settings
